@@ -1,9 +1,17 @@
-# How I Developed this projects locally
+# PDF-Chat-LLM
+
+## Tech-Stack
+
+#### Frontend-ui -- Streamlit 
+#### Backend -- Langchain framework
+#### AI Model -- OpenAI Embeddings
+
+## How I Developed this projects locally
 
 >[!NOTE]
 >Understanding the Development Envoirnment
 
-## Create an Virtual environment 
+### Create an Virtual environment 
 
 > I'm using VS code (IDE) for development
 
