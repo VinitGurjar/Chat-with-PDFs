@@ -2,16 +2,16 @@
 
 ## Tech-Stack
 
-#### Frontend-ui -- Streamlit 
-#### Backend -- Langchain framework
-#### AI Model -- OpenAI Embeddings
+- Frontend-ui -- Streamlit
+- Backend -- Langchain framework
+- AI Model -- OpenAI Embeddings
 
 ## How I Developed this projects locally
 
 >[!NOTE]
 >Understanding the Development Envoirnment
 
-### Create an Virtual environment 
+### Create an Virtual environment
 
 > I'm using VS code (IDE) for development
 
@@ -23,17 +23,16 @@
  ```shell
  python -m venv project-name
  ```
+
 - Activate the env by writing the following command
 
  ```shell
   .\PLLM\Scripts\Activate.ps1
  ```
 
--  Create `requirements.py` file, write the dependencies.
--  Write the following command to install the requirements.
+- Create `requirements.py` file, write the dependencies.
+- Write the following command to install the requirements.
+
   ```shell
     pip install -r requirements.txt
   ```
-
- 
- 
