@@ -1,6 +1,7 @@
 # IMPORTS
 import streamlit as st
 import pickle
+from dotenv import load_dotenv
 
 # For pdf functionality
 from PyPDF2 import PdfReader
@@ -32,7 +33,7 @@ with st.sidebar:
 
 def main():
     st.header("Chat with PDF 📒😁")
-
+    load_dotenv()
     # Upload a pdf file
     pdf = st.file_uploader("Upload a PDF file", type="pdf")
     st.write(pdf.name)
@@ -60,6 +61,7 @@ def main():
         # Variable VectoreStore
         VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
         # Writing files to storage
+        store_name = pdf.name[:-4]
         with open(f"{store_name}.pkl", "wb") as f:
             pickle.dump(VectorStore, f)
 
