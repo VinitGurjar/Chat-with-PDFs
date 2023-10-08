@@ -9,6 +9,7 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+import os
 
 
 # sidebar contents
@@ -36,7 +37,7 @@ def main():
     load_dotenv()
     # Upload a pdf file
     pdf = st.file_uploader("Upload a PDF file", type="pdf")
-    st.write(pdf.name)
+    # st.write(pdf.name)
 
     # Display the pdf file if it is uploaded
     if pdf is not None:
@@ -54,16 +55,26 @@ def main():
         )
         chunks = text_splitter.split_text(text=text)
 
-        st.write(chunks)
+        # st.write(chunks)
 
         # Embeddings - object below and will use the FAISS `VectorStore` as our Database
-        embeddings = OpenAIEmbeddings()
-        # Variable VectoreStore
-        VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
+
         # Writing files to storage
         store_name = pdf.name[:-4]
-        with open(f"{store_name}.pkl", "wb") as f:
-            pickle.dump(VectorStore, f)
+
+        if os.path.exists(f"{store_name}.pkl"):
+            # Read file from the storage.
+            with open(f"{store_name}.pkl", "rb") as f:
+                VectorStore = pickle.load(f)
+        # st.write("🎰Embedding loaded from the disk")
+        else:  # Recompute the embeddings
+            embeddings = OpenAIEmbeddings()
+            # Variable VectoreStore
+            VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
+            with open(f"{store_name}.pkl", "wb") as f:
+                pickle.dump(VectorStore, f)
+
+            # st.write("🎰Embedding computation complete")
 
 
 if __name__ == "__main__":
