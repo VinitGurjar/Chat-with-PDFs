@@ -11,6 +11,8 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI  # will help in using LLMs
 from langchain.chains.question_answering import load_qa_chain
+from langchain.callbacks import get_openai_callback
+
 import os
 
 
@@ -86,9 +88,11 @@ def main():
             # LLM context window
             docs = VectorStore.similarity_search(query=query, k=3)
 
-            llm = OpenAI(temperature=0)
+            llm = OpenAI(model_name="gpt-3.5-turbo")
             chian = load_qa_chain(llm=llm, chain_type="stuff")
-            response = chian.run(input_documents=docs, question=query)
+            with get_openai_callback() as cb:
+                response = chian.run(input_documents=docs, question=query)
+                print(cb)
             st.write(response)
 
             # st.write(docs)
