@@ -9,6 +9,8 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+from langchain.llms import OpenAI  # will help in using LLMs
+from langchain.chains.question_answering import load_qa_chain
 import os
 
 
@@ -75,6 +77,21 @@ def main():
                 pickle.dump(VectorStore, f)
 
             # st.write("🎰Embedding computation complete")
+
+        # User Questions with AI Begun here
+        query = st.text_input("Ask me anything about your PDF file")
+        # st.write("You: ", query)
+
+        if query:
+            # LLM context window
+            docs = VectorStore.similarity_search(query=query, k=3)
+
+            llm = OpenAI(temperature=0)
+            chian = load_qa_chain(llm=llm, chain_type="stuff")
+            response = chian.run(input_documents=docs, question=query)
+            st.write(response)
+
+            # st.write(docs)
 
 
 if __name__ == "__main__":
