@@ -4,7 +4,8 @@
 
 - Frontend-ui -- Streamlit
 - Backend -- Langchain framework
-- AI Model -- OpenAI Embeddings
+- Embedding Model -- OpenAI Embeddings
+- LLM -- gpt 3.5 turbo
 
 ## How I Developed this projects locally
 
