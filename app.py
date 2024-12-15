@@ -33,7 +33,7 @@ with st.sidebar:
     )
 
     add_vertical_space(5)
-    st.write("Made with 🥰 by [Vinit Gurjar](https://github.com/VinitGurjar)")
+    st.write("Made with 🥰")
 
 
 def main():
